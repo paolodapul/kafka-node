@@ -49,7 +49,12 @@ async function producerStart(config: KafkaConfig) {
       messages: [
         {
           key: "pay_001",
-          partition: 0, // Optional
+          /**
+           * No need to set the partition manually if using paymentId as the key.
+           * Based on the key’s hash, Kafka will automatically determine the partition the message goes to.
+           * Messages with the same key always go to the same partition, ensuring order within that partition.
+           */
+          // partition: 0, // Optional
           value: JSON.stringify({
             eventId: "123e4567-e89b-12d3-a456-426614174000",
             eventType: "PAYMENT_INITIATED",

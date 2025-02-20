@@ -46,7 +46,26 @@ async function producerStart(config: KafkaConfig) {
   res.push(
     producer.send({
       topic: "payment-events",
-      messages: [{ value: "v", partition: 0, key: "x" }],
+      messages: [
+        {
+          key: "pay_001",
+          partition: 0, // Optional
+          value: JSON.stringify({
+            eventId: "123e4567-e89b-12d3-a456-426614174000",
+            eventType: "PAYMENT_INITIATED",
+            timestamp: new Date().toISOString(),
+            payment: {
+              paymentId: "pay_001",
+              orderId: "order_123",
+              userId: "user_456",
+              amount: 100.5,
+              currency: "USD",
+              status: "PENDING",
+              paymentMethod: "CREDIT_CARD",
+            },
+          }),
+        },
+      ],
     })
   );
   await Promise.all(res);

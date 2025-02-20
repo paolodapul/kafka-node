@@ -30,3 +30,13 @@ A **Kafka partition** is a **subdivision of a topic** that allows Kafka to scale
 3. **Message Ordering per Key** – Messages with the same key always go to the same partition, ensuring order **within that partition**.
 4. **Fault Tolerance** – Partitions are replicated across brokers to prevent data loss if a broker fails.
 5. **Independent Offsets** – Each consumer group tracks **offsets per partition**, allowing flexible consumption patterns.
+
+## Consumer  
+A **Kafka consumer** is responsible for **reading messages (events) from Kafka topics**. It processes data produced by Kafka producers.
+
+### **Purpose of a Consumer**  
+1. **Reads Events from Kafka** – Subscribes to one or more topics and consumes messages from partitions.  
+2. **Ensures Message Processing** – Uses **consumer offsets** to track which messages have been read and processed.  
+3. **Consumer Groups for Scalability** – Multiple consumers can form a **consumer group**, where each partition is consumed by only one consumer at a time, enabling parallel processing.  
+4. **Message Deserialization** – Converts received byte messages into usable formats (JSON, Avro, Protobuf).  
+5. **Pull-Based Consumption** – Consumers **pull messages** from Kafka at their own pace, allowing backpressure handling.
